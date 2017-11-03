@@ -6,10 +6,9 @@ cwalert-diskのマルチマウントポイント対応版です
 
 ## アンニュイな点
 
-* マウントポイントが / のみ対応
 * centos6系（Amazon Linux含む）のみ確認
 * docker、、、なにそれ、うまいの？（クロスコンパイル系は一旦コメントアウト）
-* そもそもディクスサイズの確認方法が力技&絶対にNGな環境があるはず
+* そもそもディクスサイズの確認方法が力技&絶対にNGな環境がある（osxとか）
 
 ## install
 
@@ -20,25 +19,17 @@ rake
 ./mruby/bin/cwalert-disk2 YOUR_CONFIG_FILE_PATH
 ```
 
-or
-
-amazon linux
-
-```
-# TODO
-# curl -L -o cwalert-disk https://github.com/pacojp/cwalert-disk2/blob/master/bin/cwalert-disk-amazon-linux-x86_64?raw=true
-chmod 755 cwalert-disk2
-./cwalert-disk2 YOUR_CONFIG_FILE_PATH
-```
-
 ## config file format
 
 ``` json
 {
+  "verbose": true,
   "hostname": "YOUR_HOST_NAME",
-  "warning":   70,
-  "critical":  85,
-  "warning-hours": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+  "mount_points": [
+    {"mount_point": "/", "warning": 70, "critical": 80},
+    {"mount_point": "/home", "warning": 60, "critical": 90}
+  ],
+  "warning-hours": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
   "cw": {
     "room-id":  "CW_ROOM_ID",
     "token":    "CW_TOKEN",
@@ -48,6 +39,7 @@ chmod 755 cwalert-disk2
 ```
 optionals
 
+* verbose
 * hostname
 * warning-hours
 * users-to
