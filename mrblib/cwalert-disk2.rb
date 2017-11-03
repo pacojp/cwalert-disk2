@@ -26,7 +26,7 @@ class Checker
       warning = mp["warning"].to_i
       critical = mp["critical"].to_i
 
-      puts "checking mount_point #{mount_point}"
+      logging "checking mount_point #{mount_point}"
       unless mount_point =~ /\A\//
         puts "mount_point error #{mount_point}"
         next
